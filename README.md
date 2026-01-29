@@ -45,7 +45,7 @@ go mod tidy
 
 ### 1. 配置修改
 
-修改项目 `config/default.go` 文件，配置数据库信息与大模型参数：
+修改项目 `config/config.go` 文件，配置数据库信息与大模型参数：
 
 ```go
 package config
@@ -68,8 +68,8 @@ func DefaultAgentConfig() *AgentConfig {
         DefaultTimeRange: 24 * time.Hour,
         LLM: LLMConfig{
             APIKey:      "你的大模型 API Key", // 替换为自身 API Key
-            APIBaseURL:  "https://dashscope.aliyuncs.com/compatible-mode/v1", // 通义千问兼容地址（可替换为 DeepSeek/OpenAI 地址）
-            ModelName:   "qwen-turbo", // 模型名称（通义千问 qwen-turbo / DeepSeek deepseek-chat / OpenAI gpt-3.5-turbo）
+            APIBaseURL:  "https://api.deepseek.com/v1", // 兼容地址（可替换为 通义千问/OpenAI 地址）
+            ModelName:   "deepseek-chat", // 模型名称（通义千问 qwen-turbo / DeepSeek deepseek-chat / OpenAI gpt-3.5-turbo）
             Temperature: 0.7,
             Timeout:     15 * time.Second,
         },
@@ -168,7 +168,6 @@ servicetelemetry/
 ├── go.mod                 # Go 模块定义
 ├── config/
 │   ├── config.go          # 配置结构定义
-│   └── default.go         # 默认配置
 ├── core/
 │   ├── checker.go         # 服务检查器
 │   ├── concurrent.go      # 并发控制
@@ -243,7 +242,7 @@ A：检查：
 3. 数据库表是否已成功创建。
 
 ### Q4：AI 功能无法使用，提示「未开启」？
-A：请检查 `config/default.go` 中的 `EnableAI` 是否为 `true`，并确保 API Key 配置正确。
+A：请检查 `config/config.go` 中的 `EnableAI` 是否为 `true`，并确保 API Key 配置正确。
 
 ## 🔮 后续规划
 
